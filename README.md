@@ -1,6 +1,5 @@
 # [Atari Lynx](https://en.wikipedia.org/wiki/Atari_Lynx) for [MiSTer Platform](https://github.com/MiSTer-devel/Main_MiSTer/wiki)
 
-
 # HW Requirements
 SDRam module of any size is required
 
@@ -16,7 +15,7 @@ MD5:
 FCD403DB69F54290B51035D82F835E7B
 
 # Status
-All official games should be playable.
+All official games should be playable.  
 Most Homebrew works.
 
 # Features
@@ -29,8 +28,8 @@ Most Homebrew works.
 - Flickerblend: 2 or 3 frames blending like real Lynx Screen
 
 # Refresh Rate
-Lynx uses custom refresh rates from ~50Hz up to ~79Hz.
-Some games switch between different modes.
+Lynx uses custom refresh rates from ~50Hz up to ~79Hz.  
+Some games switch between different modes.  
 To compensate you can either:
 - live with tearing
 - Buffer video: triple buffering for clean image, but increases lag
@@ -40,8 +39,8 @@ To compensate you can either:
 Lynx has built in rotation, supported by most games, using the Joypad Keys "Option2" + "Pause"
 
 # Savestates
-Core provides 4 slots to save and restore the state. 
-Those can be saved to SDCard or reside only in memory for temporary use(OSD Option). 
+Core provides 4 slots to save and restore the state.  
+Those can be saved to SDCard or reside only in memory for temporary use(OSD Option).  
 Usage with either Keyboard, Gamepad mappable button or OSD.
 
 Keyboard Hotkeys for save states:
@@ -50,15 +49,15 @@ Keyboard Hotkeys for save states:
 
 Gamepad:
 - Savestatebutton+Left or Right switches the savestate slot
-- Savestatebutton+Pause+Down saves to the selected slot
-- Savestatebutton+Pause+Up loads from the selected slot
+- Savestatebutton+Down saves to the selected slot
+- Savestatebutton+Up loads from the selected slot
 
 # Rewind
-To use rewind, turn on the OSD Option "Rewind Capture" and map the rewind button.
-You may have to restart the game for the function to work properly.
-Attention: Rewind capture will slow down your game by about 0.5% and may lead to light audio stutter.
-Rewind capture is not compatible to "Pause when OSD is open", so pause is disabled when Rewind capture is on.
+To use rewind, turn on the OSD Option "Rewind Capture" and map the rewind button.  
+You may have to restart the game for the function to work properly.  
+Attention: Rewind capture will slow down your game by about 0.5% and may lead to light audio stutter.  
+Rewind capture is not compatible to "Pause when OSD is open", so pause is disabled when Rewind capture is on.  
 
 # Missing features
-Comlynx/UART only implemented for Interrupts
+Comlynx/UART only implemented for Interrupts  
 Custom external EEPROM not supported(not used in official games, only homebrew)

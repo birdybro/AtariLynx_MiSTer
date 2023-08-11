@@ -199,7 +199,7 @@ assign AUDIO_MIX = status[8:7];
 // 0         1         2         3          4         5         6
 // 01234567890123456789012345678901 23456789012345678901234567890123
 // 0123456789ABCDEFGHIJKLMNOPQRSTUV 0123456789ABCDEFGHIJKLMNOPQRSTUV
-// xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx xxxxxxxx
+// xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx xxxxxxxxx
 
 `include "build_id.v" 
 localparam CONF_STR = {
@@ -210,6 +210,7 @@ localparam CONF_STR = {
 	"H1O[39],Cheats Enabled,Yes,No;",
 	"-;",
 	"O[36],Savestates to SDCard,On,Off;",
+	"O[40],Autoincrement Slot,Off,On;",
 	"O[38:37],Savestate Slot,1,2,3,4;",
 	"h0R[28],Save state (Alt-F1);",
 	"h0R[29],Restore state (F1);",
@@ -243,7 +244,7 @@ localparam CONF_STR = {
 	"R[0],Reset;",
 	"J1,A,B,Option1,Option2,Pause,FastForward,Savestates,Rewind;",
 	"I,",
-	"Slot=DPAD|Save/Load=Pause+DPAD,",
+	"Load=DPAD Up|Save=Down|Slot=L+R,",
 	"Active Slot 1,",
 	"Active Slot 2,",
 	"Active Slot 3,",
@@ -322,12 +323,12 @@ hps_io #(.CONF_STR(CONF_STR), .WIDE(1)) hps_io
 	.ioctl_dout(ioctl_dout),
 	.ioctl_wait(ioctl_wait),
 	.ioctl_index(filetype),
-	
+
 	.status(status),
 	.status_menumask({~gg_active, cart_ready}),
-	.status_in({status[63:39],ss_slot,status[36:0]}),
+	.status_in({status[63:39],ss_slot,status[36:30],2'b00,status[27:0]}),
 	.status_set(statusUpdate),
-	
+
 	.sd_lba('{sd_lba}),
 	.sd_rd(sd_rd),
 	.sd_wr(sd_wr),
@@ -350,12 +351,12 @@ hps_io #(.CONF_STR(CONF_STR), .WIDE(1)) hps_io
 	.joystick_1(joystick_1),
 	.joystick_2(joystick_2),
 	.joystick_3(joystick_3),
-	
+
 	.ps2_key(ps2_key),
-	
+
 	.info_req(ss_info_req),
 	.info(ss_info),
-	
+
 	.TIMESTAMP(RTC_time)
 );
 
@@ -882,8 +883,9 @@ savestate_ui savestate_ui
 	.joyUp          (joy0_unmod[3] ),
 	.joyStart       (joy0_unmod[8] ),
 	.joyRewind      (joy0_unmod[11]),
-	.rewindEnable   (status[27]    ), 
+	.rewindEnable   (status[27]    ),
 	.status_slot    (status[38:37] ),
+	.autoincslot    (status[40]    ),
 	.OSD_saveload   (status[29:28] ),
 	.ss_save        (ss_save       ),
 	.ss_load        (ss_load       ),
